@@ -246,6 +246,12 @@ async function sendQuestion() {
           } else {
             step.status = data.status;
           }
+        } else if (data.type === "text") {
+          messages.value.splice(stepIndex, 1, {
+            role: "assistant",
+            type: "text",
+            content: data.content || "",
+          });
         } else if (data.type === "result" && Array.isArray(data.data)) {
           messages.value.push({
             role: "assistant",
@@ -790,3 +796,5 @@ input {
   }
 }
 </style>
+
+
