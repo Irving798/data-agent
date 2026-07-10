@@ -50,3 +50,8 @@ llm:
   model_name: glm-5-2-260617
   api_key: <your-llm-api-key>
   base_url: https://ark.cn-beijing.volces.com/api/v3
+
+query_execution:
+  max_rows: 500
+  timeout_ms: 10000
+  max_result_bytes: 1048576

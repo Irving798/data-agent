@@ -223,8 +223,14 @@
                       <span class="result-kicker">QUERY RESULT</span>
                       <h3>查询结果</h3>
                     </div>
-                    <span class="row-count">{{ msg.rows.length }} 行</span>
+                    <span class="row-count">
+                      {{ msg.rows.length }} 行{{ msg.truncated ? "（已截断）" : "" }}
+                    </span>
                   </header>
+
+                  <p v-if="msg.truncated" class="result-limit-notice">
+                    结果超过单次查询限制，仅展示前 {{ msg.rows.length }} 行。请增加筛选条件后重新查询。
+                  </p>
 
                   <div v-if="msg.rows.length" class="table-wrap">
                     <table class="result-table">
@@ -460,6 +466,7 @@ async function processEvent(rawEvent, stepMessageId) {
         type: "table",
         columns: Object.keys(data.data[0] || {}),
         rows: data.data,
+        truncated: Boolean(data.truncated),
       }),
     );
   } else if (data.type === "error") {
@@ -1294,6 +1301,15 @@ summary:focus-visible {
   background: #edf1f4;
   font-size: 10px;
   font-weight: 700;
+}
+
+.result-limit-notice {
+  margin: 0;
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2e7ec;
+  color: #8a5a12;
+  background: #fff8e8;
+  font-size: 13px;
 }
 
 .table-wrap {

@@ -77,6 +77,13 @@ class LLMConfig:
 
 
 @dataclass
+class QueryExecutionConfig:
+    max_rows: int
+    timeout_ms: int
+    max_result_bytes: int
+
+
+@dataclass
 class AppConfig:
     logging: LoggingConfig
     db_meta: DBConfig
@@ -85,6 +92,7 @@ class AppConfig:
     embedding: EmbeddingConfig
     es: ESConfig
     llm: LLMConfig
+    query_execution: QueryExecutionConfig
 
 
 config_file = Path(__file__).parents[2] / 'conf' / 'app_config.yaml'
