@@ -11,6 +11,7 @@ from app.repositories.mysql.dw.dw_mysql_repository import DWMySQLRepository
 from app.repositories.mysql.meta.meta_mysql_repository import MetaMySQLRepository
 from app.repositories.qdrant.column_qdrant_repository import ColumnQdrantRepository
 from app.repositories.qdrant.metric_qdrant_repository import MetricQdrantRepository
+from app.services.health_service import HealthService
 from app.services.query_service import QueryService
 
 
@@ -46,6 +47,18 @@ async def get_meta_mysql_repository(session: AsyncSession = Depends(get_meta_ses
 
 async def get_dw_mysql_repository(session: AsyncSession = Depends(get_dw_session)):
     return DWMySQLRepository(session)
+
+
+async def get_health_service(
+        meta_mysql_session: AsyncSession = Depends(get_meta_session),
+        dw_mysql_session: AsyncSession = Depends(get_dw_session),
+) -> HealthService:
+    return HealthService(
+        meta_mysql_session=meta_mysql_session,
+        dw_mysql_session=dw_mysql_session,
+        es_client=es_client_manager.client,
+        qdrant_client=qdrant_client_manager.client,
+    )
 
 
 async def get_query_service(

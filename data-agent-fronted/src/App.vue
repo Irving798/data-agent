@@ -60,10 +60,25 @@
 
       <div class="sidebar-status">
         <div class="status-line">
-          <span class="status-dot" aria-hidden="true"></span>
-          <strong>数据服务正常</strong>
+          <span class="status-dot" :class="healthState.status" aria-hidden="true"></span>
+          <strong>{{ healthTitle }}</strong>
+          <button
+            class="health-refresh"
+            type="button"
+            :disabled="healthLoading"
+            title="刷新服务状态"
+            aria-label="刷新服务状态"
+            @click="fetchHealth"
+          >
+            ↻
+          </button>
         </div>
-        <p>MySQL · Elasticsearch · Qdrant</p>
+        <div class="service-status-list">
+          <span v-for="service in serviceStatuses" :key="service.key">
+            <i :class="service.status" aria-hidden="true"></i>
+            {{ service.label }}
+          </span>
+        </div>
       </div>
     </aside>
 
@@ -87,8 +102,8 @@
 
         <div class="header-actions">
           <span class="connection-state">
-            <span class="status-dot" aria-hidden="true"></span>
-            已连接
+            <span class="status-dot" :class="healthState.status" aria-hidden="true"></span>
+            {{ connectionLabel }}
           </span>
           <button
             class="new-session-button"
@@ -271,9 +286,11 @@
 </template>
 
 <script setup>
-import { nextTick, ref } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
 
 const API_URL = "/api/query";
+const HEALTH_URL = "/api/health";
+const HEALTH_REFRESH_INTERVAL = 30_000;
 
 const examples = [
   {
@@ -304,7 +321,62 @@ const messages = ref([]);
 const messagesEl = ref(null);
 const textareaEl = ref(null);
 const sidebarOpen = ref(false);
+const healthLoading = ref(false);
+const healthState = ref({ status: "checking", services: {} });
 let nextMessageId = 1;
+let healthTimer;
+
+const serviceDefinitions = [
+  { key: "mysql", label: "MySQL" },
+  { key: "elasticsearch", label: "Elasticsearch" },
+  { key: "qdrant", label: "Qdrant" },
+];
+
+const healthTitle = computed(() => ({
+  checking: "正在检查数据服务",
+  healthy: "数据服务正常",
+  degraded: "部分数据服务异常",
+  unavailable: "无法获取服务状态",
+}[healthState.value.status]));
+
+const connectionLabel = computed(() => ({
+  checking: "检查中",
+  healthy: "已连接",
+  degraded: "连接异常",
+  unavailable: "后端不可达",
+}[healthState.value.status]));
+
+const serviceStatuses = computed(() => serviceDefinitions.map((service) => ({
+  ...service,
+  status: healthState.value.services?.[service.key]?.status || "unknown",
+})));
+
+async function fetchHealth() {
+  if (healthLoading.value) return;
+  healthLoading.value = true;
+  try {
+    const response = await fetch(HEALTH_URL, { cache: "no-store" });
+    if (!response.ok) throw new Error(`健康检查返回 ${response.status}`);
+    const data = await response.json();
+    healthState.value = {
+      status: data.status,
+      services: data.services || {},
+    };
+  } catch {
+    healthState.value = { status: "unavailable", services: {} };
+  } finally {
+    healthLoading.value = false;
+  }
+}
+
+onMounted(() => {
+  fetchHealth();
+  healthTimer = window.setInterval(fetchHealth, HEALTH_REFRESH_INTERVAL);
+});
+
+onUnmounted(() => {
+  if (healthTimer) window.clearInterval(healthTimer);
+});
 
 function createMessage(message) {
   return { id: nextMessageId++, ...message };
@@ -715,14 +787,78 @@ summary:focus-visible {
   height: 8px;
   flex: 0 0 8px;
   border-radius: 50%;
+  background: #9aa4b2;
+  box-shadow: 0 0 0 4px rgba(154, 164, 178, 0.12);
+}
+
+.status-dot.healthy,
+.service-status-list i.healthy {
   background: #20a66a;
+}
+
+.status-dot.healthy {
   box-shadow: 0 0 0 4px rgba(32, 166, 106, 0.12);
 }
 
-.sidebar-status p {
-  margin: 7px 0 0 16px;
+.status-dot.degraded,
+.service-status-list i.unhealthy {
+  background: #d99716;
+}
+
+.status-dot.degraded {
+  box-shadow: 0 0 0 4px rgba(217, 151, 22, 0.12);
+}
+
+.status-dot.unavailable {
+  background: #cf4b4b;
+  box-shadow: 0 0 0 4px rgba(207, 75, 75, 0.12);
+}
+
+.status-dot.checking {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.health-refresh {
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  border: 0;
+  border-radius: 5px;
+  color: #718096;
+  background: transparent;
+  cursor: pointer;
+}
+
+.health-refresh:hover:not(:disabled) {
+  color: #137f75;
+  background: #edf5f4;
+}
+
+.health-refresh:disabled {
+  cursor: wait;
+  opacity: 0.45;
+}
+
+.service-status-list {
+  margin: 8px 0 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
   color: #7a8699;
   font-size: 11px;
+}
+
+.service-status-list span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.service-status-list i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #a7b0bc;
 }
 
 .workspace {
