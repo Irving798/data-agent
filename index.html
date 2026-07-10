@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Irving | Personal Blog</title>
+  <meta name="description" content="Irving 的个人博客与 data-agent Web 应用项目主页。" />
+  <style>
+    :root { --ink:#19202a; --muted:#5d6877; --paper:#f7f5ef; --surface:#fff; --line:#d9d4c7; --teal:#117c7a; --amber:#c87928; --green:#e9efe9; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    a { color:inherit; text-decoration:none; }
+    nav { min-height:68px; display:flex; align-items:center; justify-content:space-between; padding:0 clamp(18px,5vw,64px); border-bottom:1px solid rgba(25,32,42,.1); background:rgba(247,245,239,.92); position:sticky; top:0; }
+    .brand { font-weight:900; }
+    .links { display:flex; gap:clamp(14px,3vw,32px); color:var(--muted); font-size:.94rem; }
+    .hero { min-height:calc(100vh - 68px); display:grid; grid-template-columns:minmax(0,.92fr) minmax(330px,1.08fr); gap:clamp(30px,6vw,76px); align-items:center; padding:clamp(42px,7vw,92px) clamp(18px,5vw,64px) 56px; }
+    .eyebrow { margin:0 0 14px; color:#0c5554; font-size:.78rem; font-weight:900; text-transform:uppercase; }
+    h1 { margin:0; max-width:11ch; font-size:clamp(3.3rem,7.5vw,7.7rem); line-height:.92; letter-spacing:0; }
+    .lead { margin:28px 0 0; max-width:620px; color:var(--muted); font-size:clamp(1.05rem,2vw,1.28rem); line-height:1.75; }
+    .actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:34px; }
+    .button { min-height:48px; display:inline-flex; align-items:center; justify-content:center; padding:0 20px; border:1px solid var(--ink); border-radius:6px; font-weight:900; }
+    .primary { color:white; background:var(--ink); }
+    .visual { min-height:480px; border-radius:8px; background:#2d3340; color:white; padding:28px; box-shadow:0 24px 80px rgba(30,36,46,.16); display:grid; align-content:end; overflow:hidden; position:relative; }
+    .visual:before { content:""; position:absolute; inset:0; background:linear-gradient(135deg, rgba(17,124,122,.42), transparent 46%), radial-gradient(circle at 80% 20%, rgba(200,121,40,.35), transparent 28%); opacity:.9; }
+    .screen { position:relative; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.08); border-radius:8px; padding:18px; backdrop-filter:blur(10px); }
+    .bars { display:grid; grid-template-columns:1fr 1.4fr .7fr 1.1fr; gap:10px; align-items:end; height:190px; margin-bottom:18px; }
+    .bars span { display:block; border-radius:4px 4px 0 0; background:#57c6bd; }
+    .bars span:nth-child(2) { height:84%; background:#e0a15e; } .bars span:nth-child(1) { height:48%; } .bars span:nth-child(3) { height:62%; } .bars span:nth-child(4) { height:74%; }
+    .screen p { margin:0; color:rgba(255,255,255,.78); line-height:1.65; }
+    .band { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border-block:1px solid var(--line); }
+    .band div { min-height:108px; padding:24px clamp(18px,5vw,64px); display:flex; align-items:center; gap:18px; background:var(--surface); font-weight:800; }
+    .metric { color:var(--amber); font-size:1.6rem; font-weight:900; }
+    section { padding:clamp(58px,8vw,104px) clamp(18px,5vw,64px); }
+    h2 { margin:0 0 26px; font-size:clamp(2rem,4vw,4rem); line-height:1; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    article, .panel { border:1px solid var(--line); border-radius:8px; background:var(--surface); padding:24px; }
+    article { min-height:252px; display:flex; flex-direction:column; }
+    .meta { display:flex; justify-content:space-between; gap:12px; color:#0c5554; font-size:.78rem; font-weight:900; }
+    h3 { margin:32px 0 12px; font-size:1.35rem; line-height:1.18; }
+    article p, .project p { color:var(--muted); line-height:1.7; margin:0; }
+    .read { margin-top:auto; padding-top:22px; color:var(--amber); font-weight:900; font-size:.86rem; }
+    .project { display:grid; grid-template-columns:minmax(0,1fr) minmax(320px,.72fr); gap:clamp(28px,5vw,68px); background:var(--green); }
+    .tags { display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+    .tags span { padding:8px 12px; border-radius:999px; border:1px solid rgba(17,124,122,.28); background:rgba(255,255,255,.62); color:#0c5554; font-weight:800; font-size:.88rem; }
+    dl { margin:0; } dt { color:var(--muted); font-size:.82rem; font-weight:900; } dd { margin:8px 0 20px; font-size:1.05rem; font-weight:900; overflow-wrap:anywhere; } dd a { color:#0c5554; }
+    footer { display:flex; justify-content:space-between; gap:18px; padding:28px clamp(18px,5vw,64px); border-top:1px solid var(--line); color:var(--muted); }
+    @media (max-width: 900px) { .hero,.project,.grid,.band { grid-template-columns:1fr; } .hero { min-height:auto; } }
+    @media (max-width: 620px) { nav,footer { align-items:flex-start; flex-direction:column; padding-block:14px; } h1 { font-size:clamp(3rem,16vw,4.6rem); } .actions { flex-direction:column; } .button { width:100%; } .visual { min-height:340px; } }
+  </style>
+</head>
+<body>
+  <nav><a class="brand" href="#top">Irving</a><div class="links"><a href="#writing">文章</a><a href="#project">项目</a><a href="https://github.com/Irving798/data-agent">GitHub</a></div></nav>
+  <main>
+    <section class="hero" id="top">
+      <div><p class="eyebrow">Personal Blog / Data Agent Builder</p><h1>Irving 的个人博客</h1><p class="lead">我在这里记录 data-agent 的构建过程、AI 数据工作流实践，以及把一个个人项目做成可用产品的工程思考。</p><div class="actions"><a class="button primary" href="http://8.137.170.111">打开我的 Web 应用</a><a class="button" href="https://github.com/Irving798/data-agent">查看源码</a></div></div>
+      <div class="visual" aria-label="Data-agent visual"><div class="screen"><div class="bars"><span></span><span></span><span></span><span></span></div><p>Data-agent turns messy questions into a focused workflow: understand intent, fetch data, stream answers, and keep the product loop visible.</p></div></div>
+    </section>
+    <div class="band"><div><span class="metric">01</span>真实项目构建日志</div><div><span class="metric">02</span>AI 与数据工作流笔记</div><div><span class="metric">03</span>开放源码与在线体验</div></div>
+    <section id="writing"><p class="eyebrow">Writing</p><h2>最新文章</h2><div class="grid"><article><div class="meta"><span>Product Notes</span><time>2026-07-10</time></div><h3>把数据代理做成真正可用的工作流</h3><p>记录 data-agent 从想法、接口、前端体验到线上部署的设计取舍。</p><span class="read">4 min</span></article><article><div class="meta"><span>Engineering</span><time>2026-07-08</time></div><h3>个人项目不只是 Demo</h3><p>一个项目主页应该解释问题、展示入口、公开源码，也要留下持续迭代的空间。</p><span class="read">3 min</span></article><article><div class="meta"><span>Writing</span><time>2026-07-05</time></div><h3>下一步：把博客变成构建日志</h3><p>后续文章会围绕数据应用、AI Agent、前端工程和部署实践展开。</p><span class="read">2 min</span></article></div></section>
+    <section class="project" id="project"><div><p class="eyebrow">Featured Project</p><h2>data-agent</h2><p>这是我的 Web 应用项目入口。博客会围绕它持续更新：为什么做、怎么设计、如何迭代，以及每个版本解决了哪些数据处理问题。</p><div class="tags"><span>AI Agent</span><span>Data Workflow</span><span>Frontend Engineering</span><span>Product Thinking</span><span>Deployment</span></div></div><div class="panel"><dl><dt>线上地址</dt><dd><a href="http://8.137.170.111">8.137.170.111</a></dd><dt>源码仓库</dt><dd><a href="https://github.com/Irving798/data-agent">Irving798/data-agent</a></dd><dt>博客定位</dt><dd>构建记录、产品思考、工程复盘</dd></dl></div></section>
+  </main>
+  <footer><span>Irving's personal blog</span><a href="https://github.com/Irving798/data-agent">GitHub</a></footer>
+</body>
+</html>
