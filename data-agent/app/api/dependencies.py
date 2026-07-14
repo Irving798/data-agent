@@ -1,3 +1,5 @@
+"""集中组装 API 层所需的客户端、仓储和业务服务依赖。"""
+
 from fastapi import Depends
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from sqlalchemy.ext.asyncio import AsyncSession

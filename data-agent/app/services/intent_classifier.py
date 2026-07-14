@@ -1,3 +1,5 @@
+"""使用轻量规则将输入区分为数据查询、闲聊或待澄清问题。"""
+
 from enum import StrEnum
 
 

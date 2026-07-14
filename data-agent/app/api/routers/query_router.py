@@ -1,3 +1,5 @@
+"""接收自然语言问题并以 SSE 形式流式返回处理结果。"""
+
 from fastapi import APIRouter
 from fastapi.params import Depends
 from starlette.responses import StreamingResponse

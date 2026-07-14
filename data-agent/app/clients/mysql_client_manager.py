@@ -1,3 +1,5 @@
+"""管理 SQLAlchemy 异步引擎与会话工厂的生命周期。"""
+
 import asyncio
 from typing import Optional
 

@@ -1,3 +1,5 @@
+"""定义元数据知识库同步文件的数据结构。"""
+
 from dataclasses import dataclass
 from typing import Optional
 

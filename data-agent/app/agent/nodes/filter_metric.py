@@ -1,3 +1,5 @@
+"""使用大模型从召回结果中过滤与问题相关的业务指标。"""
+
 import yaml
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import PromptTemplate

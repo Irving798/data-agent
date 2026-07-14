@@ -1,4 +1,6 @@
 
+"""手动验证 Embedding 服务连通性及向量维度。"""
+
 import asyncio
 from app.clients.embedding_client_manager import embedding_client_manager
 

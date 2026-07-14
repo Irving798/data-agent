@@ -1,3 +1,5 @@
+"""为 SQL 生成补充日期、数据库方言和版本等运行时上下文。"""
+
 from datetime import datetime
 
 from langgraph.runtime import Runtime

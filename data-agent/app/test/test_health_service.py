@@ -1,3 +1,5 @@
+"""验证依赖服务健康状态的并发汇总逻辑。"""
+
 from unittest import IsolatedAsyncioTestCase
 from unittest.mock import AsyncMock
 

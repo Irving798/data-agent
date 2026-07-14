@@ -1,3 +1,5 @@
+"""根据应用配置创建可供各智能体节点复用的聊天模型。"""
+
 from langchain.chat_models import init_chat_model
 
 from app.conf.app_config import app_config

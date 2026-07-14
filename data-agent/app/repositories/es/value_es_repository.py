@@ -1,3 +1,5 @@
+"""提供字段真实取值的 Elasticsearch 批量写入与全文检索。"""
+
 from dataclasses import asdict
 
 from elasticsearch import AsyncElasticsearch

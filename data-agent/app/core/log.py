@@ -1,3 +1,5 @@
+"""配置统一日志格式，并为每条日志注入请求追踪标识。"""
+
 import asyncio
 import sys
 from pathlib import Path

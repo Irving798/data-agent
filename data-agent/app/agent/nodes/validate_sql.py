@@ -1,3 +1,5 @@
+"""通过数据仓库的 EXPLAIN 能力预校验待执行 SQL。"""
+
 from langgraph.runtime import Runtime
 
 from app.agent.context import DataAgentContext

@@ -1,4 +1,5 @@
 <script setup>
+// Vite 脚手架示例组件，目前未被主页面引用，仅保留用于开发环境验证。
 import { ref } from 'vue'
 
 defineProps({

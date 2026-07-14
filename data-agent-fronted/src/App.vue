@@ -1,4 +1,5 @@
 <template>
+  <!-- 页面分为可折叠侧边栏与主工作区，移动端通过遮罩层控制导航。 -->
   <div class="app-shell" :class="{ 'sidebar-open': sidebarOpen }">
     <button
       class="sidebar-scrim"
@@ -294,10 +295,12 @@
 <script setup>
 import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
 
+// 接口地址保持相对路径，由开发代理或生产环境 Nginx 统一转发。
 const API_URL = "/api/query";
 const HEALTH_URL = "/api/health";
 const HEALTH_REFRESH_INTERVAL = 30_000;
 
+// 示例问题同时服务于侧边栏快捷入口和空状态引导卡片。
 const examples = [
   {
     short: "各省销售额",
@@ -332,6 +335,7 @@ const healthState = ref({ status: "checking", services: {} });
 let nextMessageId = 1;
 let healthTimer;
 
+// 前端只展示直接影响问数链路的核心依赖，后端负责汇总详细状态。
 const serviceDefinitions = [
   { key: "mysql", label: "MySQL" },
   { key: "elasticsearch", label: "Elasticsearch" },
@@ -430,6 +434,7 @@ function stepStatusLabel(status) {
 }
 
 async function processEvent(rawEvent, stepMessageId) {
+  // 后端按 SSE 约定发送 data 行；无法解析的心跳或残缺事件直接忽略。
   const line = rawEvent.trim();
   if (!line.startsWith("data:")) return;
 
@@ -517,6 +522,7 @@ async function sendQuestion() {
     const decoder = new TextDecoder("utf-8");
     let buffer = "";
 
+    // 网络分片不保证事件边界，因此先累计缓冲区，再按空行拆分完整事件。
     while (true) {
       const { value, done } = await reader.read();
       if (done) break;
@@ -561,6 +567,7 @@ async function sendQuestion() {
 </script>
 
 <style scoped>
+/* 全局尺寸由根容器接管，组件内部再组织侧边栏、内容区和响应式布局。 */
 :global(html),
 :global(body),
 :global(#app) {

@@ -1,3 +1,5 @@
+"""业务指标元数据的 SQLAlchemy 持久化模型。"""
+
 from sqlalchemy import String, Text
 from sqlalchemy.types import JSON
 from sqlalchemy.orm import Mapped, mapped_column

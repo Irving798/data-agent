@@ -1,3 +1,5 @@
+"""扩展查询关键词，并从 Qdrant 语义召回相关业务指标。"""
+
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import PromptTemplate
 from langgraph.runtime import Runtime

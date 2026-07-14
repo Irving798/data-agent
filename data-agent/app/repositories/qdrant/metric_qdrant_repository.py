@@ -1,3 +1,5 @@
+"""提供业务指标向量的写入与语义相似度检索。"""
+
 from dataclasses import asdict
 
 from qdrant_client import AsyncQdrantClient

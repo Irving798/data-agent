@@ -1,3 +1,5 @@
+"""字段与指标关联关系的 SQLAlchemy 持久化模型。"""
+
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 

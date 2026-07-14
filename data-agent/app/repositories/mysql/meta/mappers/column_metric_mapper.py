@@ -1,3 +1,5 @@
+"""转换字段指标关系实体与对应的 ORM 模型。"""
+
 from dataclasses import asdict
 
 from app.entities.column_metric import ColumnMetric

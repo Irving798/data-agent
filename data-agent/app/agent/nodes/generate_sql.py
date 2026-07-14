@@ -1,3 +1,5 @@
+"""依据问题、元数据和运行时上下文生成目标数据库 SQL。"""
+
 import yaml
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate

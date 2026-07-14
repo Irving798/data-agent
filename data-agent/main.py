@@ -1,3 +1,5 @@
+"""Data Agent FastAPI 应用入口与请求追踪中间件。"""
+
 import uuid
 
 from fastapi import FastAPI, Request

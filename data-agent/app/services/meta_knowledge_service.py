@@ -1,3 +1,5 @@
+"""编排元数据采集、持久化、向量化与字段取值索引构建。"""
+
 import uuid
 from pathlib import Path
 

@@ -1,3 +1,5 @@
+"""组装并编译自然语言问数的 LangGraph 工作流。"""
+
 import asyncio
 
 from langgraph.constants import START, END

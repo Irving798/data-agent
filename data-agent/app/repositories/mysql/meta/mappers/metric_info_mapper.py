@@ -1,3 +1,5 @@
+"""转换指标领域实体与对应的 ORM 模型。"""
+
 from dataclasses import asdict
 
 from app.entities.metric_info import MetricInfo

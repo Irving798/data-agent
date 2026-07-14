@@ -1,3 +1,5 @@
+"""定义数据库、检索服务、大模型和日志等应用配置。"""
+
 from dataclasses import dataclass
 from pathlib import Path
 

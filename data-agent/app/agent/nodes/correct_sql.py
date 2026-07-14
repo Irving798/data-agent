@@ -1,3 +1,5 @@
+"""结合校验错误调用大模型修正首次生成的 SQL。"""
+
 import yaml
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate

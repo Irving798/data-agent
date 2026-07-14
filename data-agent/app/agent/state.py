@@ -1,3 +1,5 @@
+"""声明问数工作流在各节点之间传递的结构化状态。"""
+
 from typing import TypedDict
 
 from app.entities.column_info import ColumnInfo

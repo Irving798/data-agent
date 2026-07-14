@@ -1,3 +1,5 @@
+"""定义数据仓库字段的领域实体。"""
+
 from dataclasses import dataclass
 from typing import Any
 

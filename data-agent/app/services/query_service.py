@@ -1,3 +1,5 @@
+"""根据用户意图路由请求，并统一输出流式文本或问数结果。"""
+
 import json
 
 from langchain_core.output_parsers import StrOutputParser

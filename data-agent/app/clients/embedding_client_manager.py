@@ -1,3 +1,5 @@
+"""管理 Embedding 客户端的创建、访问和资源释放。"""
+
 # from typing import Optional
 #
 # from langchain_huggingface import HuggingFaceEndpointEmbeddings

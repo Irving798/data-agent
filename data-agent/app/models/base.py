@@ -1,3 +1,5 @@
+"""提供元数据库 ORM 模型共用的声明式基类。"""
+
 from sqlalchemy.orm import DeclarativeBase
 
 

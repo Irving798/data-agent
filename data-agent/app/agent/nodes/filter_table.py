@@ -1,3 +1,5 @@
+"""使用大模型从候选元数据中过滤相关表与字段。"""
+
 import yaml
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import PromptTemplate

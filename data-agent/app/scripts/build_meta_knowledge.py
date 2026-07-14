@@ -1,3 +1,5 @@
+"""根据配置同步元数据，并构建向量索引与全文索引。"""
+
 import asyncio
 from argparse import ArgumentParser
 from pathlib import Path

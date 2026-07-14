@@ -1,3 +1,5 @@
+"""封装 SQL 查询结果以及截断、耗时等执行元信息。"""
+
 from dataclasses import dataclass
 
 

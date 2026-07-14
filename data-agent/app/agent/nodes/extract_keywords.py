@@ -1,3 +1,5 @@
+"""从自然语言问题中抽取可用于多路检索的关键词。"""
+
 import jieba.analyse
 from langgraph.runtime import Runtime
 

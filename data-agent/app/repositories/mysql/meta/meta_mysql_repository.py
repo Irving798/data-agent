@@ -1,3 +1,5 @@
+"""提供元数据表、字段、指标及关联关系的持久化与查询。"""
+
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 

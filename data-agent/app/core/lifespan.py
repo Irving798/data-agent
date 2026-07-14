@@ -1,3 +1,5 @@
+"""管理 FastAPI 启停期间各外部客户端的初始化与释放。"""
+
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI

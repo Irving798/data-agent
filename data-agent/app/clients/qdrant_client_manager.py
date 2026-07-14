@@ -1,3 +1,5 @@
+"""管理 Qdrant 异步客户端及向量集合基础操作。"""
+
 import asyncio
 import random
 from typing import Optional

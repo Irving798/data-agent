@@ -1,3 +1,5 @@
+"""按统一目录约定读取外部提示词模板。"""
+
 from pathlib import Path
 
 

@@ -1,3 +1,5 @@
+"""验证数据仓库查询的安全限制、截断与执行元信息。"""
+
 from unittest import IsolatedAsyncioTestCase
 from unittest.mock import AsyncMock
 

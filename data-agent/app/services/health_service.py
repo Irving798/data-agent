@@ -1,3 +1,5 @@
+"""并发探测应用依赖的数据服务，并汇总整体健康状态。"""
+
 import asyncio
 from datetime import datetime, timezone
 from time import perf_counter

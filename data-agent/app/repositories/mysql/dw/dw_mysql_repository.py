@@ -1,3 +1,5 @@
+"""封装数据仓库元信息读取、SQL 校验和受限查询执行。"""
+
 import json
 
 from sqlglot import exp, parse

@@ -1,3 +1,5 @@
+"""封装 Elasticsearch 异步客户端及索引、批量写入和检索操作。"""
+
 import asyncio
 from typing import Optional
 

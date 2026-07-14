@@ -1,3 +1,5 @@
+"""定义健康检查接口的结构化响应。"""
+
 from datetime import datetime
 from typing import Literal
 

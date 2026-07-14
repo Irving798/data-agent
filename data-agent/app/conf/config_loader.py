@@ -1,3 +1,5 @@
+"""从 YAML 文件加载并转换应用配置。"""
+
 from pathlib import Path
 from typing import Type, TypeVar
 

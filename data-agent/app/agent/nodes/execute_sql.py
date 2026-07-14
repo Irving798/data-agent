@@ -1,3 +1,5 @@
+"""执行已通过校验的只读 SQL，并将结果写入流式响应。"""
+
 from langgraph.runtime import Runtime
 
 from app.agent.context import DataAgentContext

@@ -1,3 +1,5 @@
+"""转换数据表领域实体与对应的 ORM 模型。"""
+
 from dataclasses import asdict
 
 from app.entities.table_info import TableInfo

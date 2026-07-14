@@ -1,3 +1,5 @@
+"""提供数据服务健康状态查询接口。"""
+
 from fastapi import APIRouter, Depends
 
 from app.api.dependencies import get_health_service

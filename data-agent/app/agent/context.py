@@ -1,3 +1,5 @@
+"""定义工作流节点运行时共享的外部依赖。"""
+
 from typing import TypedDict
 
 from langchain_huggingface import HuggingFaceEndpointEmbeddings

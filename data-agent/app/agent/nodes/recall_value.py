@@ -1,3 +1,5 @@
+"""扩展查询关键词，并从 Elasticsearch 召回字段真实取值。"""
+
 import asyncio
 
 from langchain_core.output_parsers import JsonOutputParser
